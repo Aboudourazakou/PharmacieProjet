@@ -1,6 +1,7 @@
 #ifndef MEDICAMENT_H
 #define MEDICAMENT_H
 #include <iostream>
+
 using namespace std;
 class Medicament
 {
@@ -33,6 +34,8 @@ class Medicament
 		void setdosage(float);
 		void setdate_xp(string); 
 		void setnbrvente(int);
+		friend istream &operator>>(istream &,Medicament &);
+		
 };
 
 #endif
