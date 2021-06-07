@@ -3,7 +3,11 @@
 
 class Facture
 {
+	
 	public:
+	Facture(){
+		cout<<"Je suis facture";
+	}
 	protected:
 };
 
