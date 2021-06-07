@@ -8,5 +8,6 @@
 int main(int argc, char** argv) {
 	
 	Fournisseur f;
+	Medicament m1; 
 	return 0;
 }
