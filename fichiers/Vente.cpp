@@ -10,3 +10,4 @@ Vente::Vente(string desig,int qte,float pu,float mont)
 	
 	
 }
+

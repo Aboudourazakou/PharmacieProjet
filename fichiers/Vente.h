@@ -13,10 +13,9 @@ class Vente
 		float montant;
 		
 	public:
-		Vente(string,int,float,float){
-			
-		};
-	protected:
+		Vente(string,int,float,float);
+   
 };
 
 #endif
+

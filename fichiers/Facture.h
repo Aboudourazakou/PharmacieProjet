@@ -1,5 +1,6 @@
 #ifndef FACTURE_H
 #define FACTURE_H
+using namespace std;
 
 class Facture
 {
