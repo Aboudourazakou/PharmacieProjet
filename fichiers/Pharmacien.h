@@ -1,6 +1,8 @@
+
 #ifndef PHARMACIEN_H
 #define PHARMACIEN_H
 #include<iostream>
+#include <fstream>
 using namespace std;
 class Pharmacien
 {   private:
@@ -8,10 +10,9 @@ class Pharmacien
 	string Nom;
 	string Prenom;
 	string MDP;
+	
 	public:
-		Pharmacien(int identifiant,string Nom,string Prenom,string MDP){
-		
-		};
+		Pharmacien(int,string,string,string);
 		int getIdentifiant();
 		string getNom();
 		string getPrenom();
@@ -20,10 +21,13 @@ class Pharmacien
 		void setNom(string);
 		void setPrenom(string);
 		void setMDP(string);
-		void vendreMedicament();
-		void RechercherMedicament();
-		void afficherMedicament();
-		void afficherFacture();
+		void setrole(string);
+		void afficher();
+		friend istream &operator>>(istream &,Pharmacien&);
+		//void vendreMedicament();
+       //void RechercherMedicament();
+      //void afficherMedicament();
+     //void afficherFacture();
 		
 };
 

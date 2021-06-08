@@ -16,6 +16,7 @@ class Administrateur : public Pharmacien
 		void supprimerMedicament();
 		void ModifierMedicament();
 		void supprimerFacture();
+		void afficherPharmaciens();
 		
 		
 
