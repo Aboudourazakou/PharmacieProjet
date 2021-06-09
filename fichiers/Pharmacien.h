@@ -5,14 +5,18 @@
 #include <fstream>
 using namespace std;
 class Pharmacien
-{   private:
+{  
+
+ protected:
 	int Identifiant;
 	string Nom;
 	string Prenom;
-	string MDP;
+	
 	
 	public:
-		Pharmacien(int,string,string,string);
+		Pharmacien(){
+		};
+		Pharmacien(int,string,string);
 		int getIdentifiant();
 		string getNom();
 		string getPrenom();
@@ -24,6 +28,7 @@ class Pharmacien
 		void setrole(string);
 		void afficher();
 		friend istream &operator>>(istream &,Pharmacien&);
+		void afficherListeMedicament();
 		//void vendreMedicament();
        //void RechercherMedicament();
       //void afficherMedicament();
@@ -32,4 +37,3 @@ class Pharmacien
 };
 
 #endif
-
