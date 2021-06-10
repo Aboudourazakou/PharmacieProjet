@@ -11,8 +11,10 @@ class Administrateur : public Pharmacien
 	public:
 		
 		Administrateur(int,string,string);
+		string creerCompte(string id);
 		void creerPharmacien();
-		void supprimerPharmacien();
+		string supprimerPharmacien(string);
+		string supprimerCompte(string,string);
 		bool modifierPharmacien(string);
 		void modifierMedicament(string,Medicament &);
 		void ajouterMedicament(Medicament &M);
@@ -20,6 +22,7 @@ class Administrateur : public Pharmacien
 		void ModifierMedicament();
 		void supprimerFacture();
 		void afficherPharmaciens();
+		bool supprimerMedicament(string);
 		
 		
 		

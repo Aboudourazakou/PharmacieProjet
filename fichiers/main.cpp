@@ -136,6 +136,7 @@ int main(int argc, char** argv) {
 	
 	int identifiant;
 	string password;
+
 	
 	welcomeGuide();
 	
@@ -149,12 +150,18 @@ int main(int argc, char** argv) {
   
     
     if(status=="error")cout<<"Erreur d'authentification!"<<endl;
+    
     else{
     	
     	 if(status=="admin"){
     	  int reponse;
     	 Medicament M;
+    	 Pharmacien p;
     	 string id;
+    	 string nomPharmacien;
+    	 string response;
+    	 string password;
+    	 string nomMedicament;
     	 Administrateur admin=TrouverAdmin(identifiant);
     	 system("cls");//Effacer la console;
     	  cout<<endl<<"\t\t\t VOUS ETES CONNECTER EN TANT QUE ADMINISTRATEUR";
@@ -171,6 +178,8 @@ int main(int argc, char** argv) {
     	  cout<<"9-Voir la liste des ventes"<<endl;
     	  cout<<"10-Voir la liste des medicaments"<<endl;
     	  cout<<"11-Voir total des ventes"<<endl;
+    	  cout<<"12-Rechercher un medicament par nom commercial ou par identifiant"<<endl;
+    	  cout<<"13-Vendre les medicaments "<<endl;
     	  cout<<"ENTRER L'OPTION DE VOTRE CHOIX'"<<endl;
     	  int option;
     	  cin>>option;
@@ -178,8 +187,37 @@ int main(int argc, char** argv) {
     	  switch(option){
     	  	
     	  	case 1:cout<<endl<<"\t\t\tCREATION PHARMACIEN"<<endl<<endl;
+    	  	        admin.creerPharmacien();
     	  	       break;
-    	  	case 2:cout<<"Creer produit"<<endl;
+    	  	case 2:cout<<endl<<"\t\t\tSUPPRESSION PHARMACIEN"<<endl<<endl;
+    	  			cout<<"Entrer l'identifiant du pharmacien a supprimer"<<endl;
+    	  			cin>>id;
+    	  			response=admin.supprimerPharmacien(id);
+    	  			if(response=="user not found")cout<<"Aucun pharmacien ne correspond a cet identifiant "<<endl;
+    	  			else if(response=="success")cout<<"OPERATION EFFECTUEE AVEC SUCCES"<<endl;
+    	  			break;
+    	  	case 3:cout<<endl<<"\t\t\tCREATION COMPTE"<<endl<<endl;
+    	  	        cout<<"Entrer l'id du pharmacien"<<endl;
+    	  	        cin>>id;
+    	  	         response=admin.creerCompte(id);
+    	  			if(response=="success") cout<<"\t\t\t OPERATION EFFECTUE AVEC SUCCES"<<endl;
+    	  			else if(response=="existe deja")cout<<"\t\t\t UN COMPTE AU MEME IDENTIFIANT EXISTE DEJA"<<endl;
+    	  			else if(response=="id non correspondant")cout<<"\t\t\t CET UTILISATEUR N''EXISTE PAS"<<endl;
+    	  			break;
+    	  	case 4:cout<<"Entrer l'identifiant"<<endl;
+    	  	
+    	  	        cin>>id;
+    	  	        cout<<"Entrer le mot de passe"<<endl;
+    	  	        cin>>password;
+    	  	        response=admin.supprimerCompte(id,password);
+    	  	        if(response=="success"){
+    	  	        	 cout<<"\t\t\t OPERATION EFFECTUE AVEC SUCCES"<<endl;
+					  }
+					else if(response=="user not found") cout<<"\t\t\t OPERATION N'A PAS ABOUTI.ENTREZ LES BONNES VALEURS"<<endl;
+    	  	        
+    	  			break;
+    	  	case 5:cout<<endl<<"\t\t\t CREATION MEDICAMENT"<<endl<<endl;
+    	  			admin.ajouterMedicament(M);
     	  			break;
     	  	case 6:cout<<endl<<"\t\t\t MODIFICATION MEDICAMENT"<<endl<<endl;
     	  			cout<<"Entrer l'identifiant du medicament a modifier"<<endl;
@@ -187,8 +225,17 @@ int main(int argc, char** argv) {
     	  		   admin.modifierMedicament(id,M);
     	  			break;
     	  	case 7:cout<<endl<<"\t\t\t SUPPRESSION D'UN MEDICAMENT'"<<endl<<endl;
+    	  	       cout<<"Entrer le nom du medicament a supprimer"<<endl;
+					cin>>nomMedicament;
+    	  	        if(admin.supprimerMedicament(nomMedicament)){
+    	  	        	cout<<"Supprime avec succes"<<endl;
+					  }
+					  else{
+					  	 cout<<"Aucune suppression n'a eu lieu.Entrer les infos corrects"<<endl;
+					  }
     	  			break;
     	  	case 8:cout<<endl<<"\t\t\t LISTE DES PHARMACIENS"<<endl<<endl;
+    	  	        admin.afficherPharmaciens();
     	  			break;
     	  	
     	  	case 9:cout<<endl<<"\t\t\t LISTE DES VENTES"<<endl<<endl;

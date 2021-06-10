@@ -3,6 +3,9 @@
 #include<string.h>
 
 Pharmacien::Pharmacien(int id,string nom,string prenom){
+	Identifiant=id;
+	Nom=nom;
+	Prenom=prenom;
 }
 int Pharmacien::getIdentifiant(){
 	return Identifiant;
@@ -40,7 +43,7 @@ istream &operator>>(istream &p,Pharmacien&g){
 	ofstream file("Pharmaciens.txt",ios::app);
 	if(file.bad())cout<<"Erreur d'ouverture fichier"<<endl;
 	else{
-		file<<g.Identifiant<<"/"<<g.Nom<<"/"<<g.Prenom<<"/"<<endl;
+		file<<g.Identifiant<<"/"<<g.Nom<<"/"<<g.Prenom<<endl;
 	}
 	
 	
@@ -50,34 +53,36 @@ istream &operator>>(istream &p,Pharmacien&g){
 
 
 void Pharmacien::afficherListeMedicament(){
-	ifstream file("Medicament.txt",ios::in);
+	ifstream file("medicament.txt",ios::in);
 	if(file.bad()){
 		cout<<"Erreur d'ouverture de fichier'"<<endl;
 		
 	}
 	else{
 		string  line;
-		cout<<" code\t\t"<<"|"<<"nomc\t\t "<<"|"<<"DCI\t\t"<<"|"<<"quantite\t\t"<<"|"<<"prix_unite\t\t"<<"|"<<"dosage\t\t"<<"|"<<"date_exp \t\t"<<"|"<<"nbrvente \t\t"<<endl<<endl;
+		cout<<"code"<<"|"<<"nomc"<<"|"<<"DCI "<<"|"<<"quantite"<<"|"<<"prix_unite"
+		<<"|"<<"Posologie"<<"|"<<"date_exp"<<"|"<<"nbrvente"<<endl<<endl;
 		while(getline(file,line)){
+			cout<<line<<endl;
 			
-		  char ligne[200];//On cree une variable tempon
-		  strcpy(ligne,line.c_str());//On convertit line en char et on lui affecte a tempon
-	      char *tempon=strtok(ligne,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<"\t\t";
-		  tempon=strtok(NULL,"|");
-		  cout<<tempon<<endl;
+//		  char ligne[200];//On cree une variable tempon
+//		  strcpy(ligne,line.c_str());//On convertit line en char et on lui affecte a tempon
+//	      char *tempon=strtok(ligne,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<"\t\t";
+//		  tempon=strtok(NULL,"|");
+//		  cout<<tempon<<endl;
 		}
 		
 	}
