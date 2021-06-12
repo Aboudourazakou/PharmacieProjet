@@ -5,12 +5,26 @@ using namespace std;
 
 class Facture
 {
-	
+	private:
+		
+		int idFacture;
+		string nomVendeur;
+		int idVendeur;
+		string date;
+		
 	public:
-	Facture(){
-		cout<<"Je suis facture";
+	Facture(int id,int idV,string nom,string d){
+		
+		idFacture=id;
+		nomVendeur=nom;
+		idVendeur=idV;
+		date=d;
+		
+		
 	}
-	protected:
+	
+	void GenererFacture();
+	void afficherFacture(string id);
 };
 
 #endif

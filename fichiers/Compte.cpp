@@ -4,23 +4,29 @@
 using namespace std;
 
 
-bool Compte::createCompte(int id,string password,string role){
+string  Compte::sauvegarder(string id){
 
+	int role;
+	ofstream file("compte.txt",ios::app);
 	
-	ofstream file("comptes.txt",ios::app);
 	if(file.bad())cout<<"Erreur d'ouverture fichier"<<endl;//Si le fichier ne s'est pas ouvert;
-	else{
-		
-		bool utilisateurExiste=false;
-		bool compteExiste=false;
-		//On verifie si l'identifiant existe vraiment dans le dossier pharmaciens;
-		 
-		
-		//On verifie si le compte pour le meme identifiant n'existe pas encore;
-		file<<id<<"|"<<password<<"|"<<role<<endl;
-	}
+			cout<<"Donner lui un mot de passe"<<endl;
+			cin>>password; 
+			cout<<"Selectionner le role"<<endl<<endl;
+			cout<<"1-Simple utilisateur"<<endl;
+			cout<<"2-Administrateur"<<endl;
+			cin>>role;
+			switch(role){
+				case 1:file<<id<<"/"<<password<<"/"<<"user"<<endl;
+				break;
+				case 2:file<<id<<"/"<<password<<"/"<<"admin"<<endl;
+				break;
+				default:file<<id<<"/"<<password<<"/"<<"user"<<endl;
+		    	}
+			
+			file.close();
+	        return "success";
 	
-	
-	 return true;
+      
 }
 

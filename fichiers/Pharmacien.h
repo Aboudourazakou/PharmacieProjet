@@ -4,6 +4,8 @@
 #include<iostream>
 #include <fstream>
 using namespace std;
+
+class Vente;
 class Pharmacien
 {  
 
@@ -18,7 +20,6 @@ class Pharmacien
 		};
 		Pharmacien(int,string,string);
 		int getIdentifiant();
-		string getNom();
 		string getPrenom();
 		string getMDP();
 		void setIdentifiant(int);
@@ -29,11 +30,12 @@ class Pharmacien
 		void afficher();
 		friend istream &operator>>(istream &,Pharmacien&);
 		void afficherListeMedicament();
-		//void vendreMedicament();
-       //void RechercherMedicament();
-      //void afficherMedicament();
-     //void afficherFacture();
+		string RechercherMedicament(string query);
+		void vendreMedicament();
+		void voirTotalVentes(string);
+        //void afficherMedicament();
+        //void afficherFacture();
 		
 };
-
+#include"Vente.h"
 #endif

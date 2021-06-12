@@ -1,6 +1,25 @@
 #include "Medicament.h"
 #include<fstream>
 using namespace std;
+
+
+
+Medicament::Medicament(int c,string n,string dc,int q,float p,string d,string da,int nb){
+	
+	
+	  code=c;
+	  nomc=n;
+	  DCI=d;
+	  quantite=q;
+	  prix_unite=p;
+	  dosage=d;
+	  date_exp=d;
+	  nbrvente=nb;
+	
+}
+
+
+
 istream &operator>>(istream &c,Medicament &m){
 	ofstream file("medicament.txt",ios::app);
 	if(file.bad())cout<<"Erreur d'ouverture fichier"<<endl;
@@ -9,6 +28,9 @@ istream &operator>>(istream &c,Medicament &m){
 	    cout<<"Medicament ajoute avec Success"<<endl;
 	}
 }
+
+
+
 	
   void Medicament::setcode(int c)
   { 
@@ -23,7 +45,7 @@ istream &operator>>(istream &c,Medicament &m){
  {
  DCI=c;
  };
- void Medicament::setdosage(float c)
+ void Medicament::setdosage(string c)
  {
  dosage=c;
  };
@@ -57,6 +79,10 @@ istream &operator>>(istream &c,Medicament &m){
 	cout<<"la date d'experation:"<<date_exp<<endl;
 	cout<<"le nombre de vente est :"<<nbrvente<<endl;
 	
+ }
+ 
+ int Medicament::getquantite(){
+ 	return quantite;
  }
  
  

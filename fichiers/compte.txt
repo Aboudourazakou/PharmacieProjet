@@ -1,8 +1,2 @@
-133/YesIgotit/admin
-133/YesIgotit/admin
-13/YesIgotit/user
-1/a/admin
-33/pass/user
-
-43nomuser
-43/nom/user
+1/admin/admin
+34/12/user

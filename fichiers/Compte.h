@@ -10,7 +10,7 @@ class Compte
 	string password;
 	string role;
 	public:
-		bool createCompte(int id,string password,string role);
+		string sauvegarder(string id);
 	
 };
 

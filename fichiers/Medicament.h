@@ -11,7 +11,7 @@ using namespace std;
 
 class Medicament
 {
-private:
+protected:
 	int code;
     string nomc;
 	string DCI;
@@ -21,21 +21,41 @@ private:
 	string date_exp;
 	int nbrvente;
 public:
+ Medicament(){
+ };
+ Medicament(int,string,string,int,float,string,string,int);
  void afficher();
  void setcode(int);
  void setdate_xp(string);
  void setDCI(string);
- void setdosage(float);
+ void setdosage(string);
  void setnbrvente(int);
  void setnomc(string);
  void setprix_unite(float);
  void setquantite(int);
- string getdate_xp();
- string getDCI();
- float getdosage();
- int getnbrvente();
- string getnomc();
- float getprix_unite();
+ 
+ int getcode(){
+ 	return code;
+ }
+ string getdate(){
+ 	
+ 	return date_exp;
+ };
+ string getDCI(){
+ 	return DCI;
+ };
+ string getdosage(){
+ 	return dosage;
+ };
+ int getnbrvente(){
+ 	return nbrvente;
+ };
+ string getnomc(){
+ 	return nomc;
+ };
+ float getprix_unite(){
+ 	return prix_unite;
+ };
  int getquantite();	
 	
 friend istream &operator>>(istream &,Medicament&);
