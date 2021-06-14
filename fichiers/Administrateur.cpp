@@ -4,7 +4,15 @@
 #include<string.h>
 #include<string>
 #include"Compte.h"
+#include <Windows.h>
+#include<conio.h>
 using namespace std;
+
+
+//void cA(int a)
+//{
+//    SetConsoleTextAttribute(hConsole, a); /**Cette fonction me permet de choisir des couleurs d affichage**/
+//}
 
 Administrateur::Administrateur(int id,string n,string p):Pharmacien(id,n,p){
 	Identifiant=id;
@@ -26,6 +34,10 @@ cin>>Prenom;
 Pharmacien p(Identifiant,Nom,Prenom);
 cin>>p;
 cout<<"PHARMACIEN CREE AVEC SUCCES"<<endl;
+cout<<"Taper une touche  pour continuer"<<endl;
+getch();
+system("cls");
+
 }
 
 
@@ -160,7 +172,7 @@ void Administrateur::modifierMedicament(string id,Medicament &M){
 			break;
 			case 3: cout<<"Entrer la quantite"<<endl;
                     cin>>qte;
-                    M.setquantite(M.quantite+qte);
+                    M.setquantite(qte);
                    
 			break;
 			case 4:	cout<<"Entrer le prix_unite"<<endl;
@@ -226,7 +238,8 @@ void Administrateur::modifierMedicament(string id,Medicament &M){
 	 file3.close();
 	 remove("tempon.txt");
   }
-	if(trouver==false)cout<<"\t\t\t AUCUN PRODUIT NE CORRESPOND A CET IDENTIFIANT"<<endl<<endl;
+	if(trouver==false)cout<<endl<<"\t\t\t AUCUN PRODUIT NE CORRESPOND A CET IDENTIFIANT"<<endl<<endl;
+	else cout<<endl<<"\t\t\t VOTRE MODIFICATION A ETE PRISE EN COMPTE"<<endl<<endl;
 	
 }   
 
@@ -257,9 +270,7 @@ void Administrateur::modifierMedicament(string id,Medicament &M){
 }
 
 
-void Administrateur::supprimerFacture(){
-    
-}
+
 void Administrateur::afficherPharmaciens(){
 	ifstream file("Pharmaciens.txt",ios::in);
 	if(file.bad()){

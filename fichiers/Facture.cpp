@@ -13,6 +13,7 @@ void Facture::GenererFacture(){
 	
 	ofstream file("facture.txt",ios::app);
 	if(file.bad())cout<<"Erreur d'ouverture fichier"<<endl;
+	
 	else{
 		file<<idFacture<<"|"<<idVendeur<<"|"<<nomVendeur<<"|"<<date<<endl;
 		ifstream file2("panier.txt",ios::in);
@@ -29,8 +30,13 @@ void Facture::GenererFacture(){
 		
 		
 	}
-	cout<<"Votre vente a ete sauvegarder avec succes"<<endl;
+	cout<<"Votre vente a ete sauvegarder avec succes"<<endl<<endl;
+
 };
+
+
+
+
 
 void Facture::afficherFacture(string id){
 	 ifstream file("facture.txt",ios::in);
@@ -40,7 +46,9 @@ void Facture::afficherFacture(string id){
 	 else{
 	 		 string line,line2,nom,date;
 	 	 while(getline(file,line)){
-	 	 	char N[200];
+	 	  if(line!="\0"){
+	 	  	
+	 	  		char N[200];
 	 	 	strcpy(N,line.c_str());
 	 	 	char *tempon=strtok(N,"|");
 	 	 	if(!strcmp(tempon,id.c_str())){
@@ -52,7 +60,7 @@ void Facture::afficherFacture(string id){
 	 	 	    date=tempon;
 	 	 	    cout<<endl<<endl<<"Nom de la societe: Pharmacie Nouvelle"<<endl;
 	 	 	    cout<<"Vendeur:   "<<nom<<endl;
-	 	 	    cout<<"Date de:    "<<date<<endl;
+	 	 	    cout<<"Date de vente:    "<<date<<endl;
 	 	 	    cout<<"Identifiant de la facture:   "<<id<<endl;
 	 	 	    cout<<"MEDICAMENTS ACHETES ET PRIX   "<<endl;
 	 	 	    cout<<"Designation|Quantite|Posologie|Prix unitaire|Prix total|"<<endl<<endl;
@@ -92,6 +100,7 @@ void Facture::afficherFacture(string id){
 	 	 	    
 	 	 		
 			  }
+		   }
 	 	 	
 	 	 	
           

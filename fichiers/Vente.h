@@ -19,14 +19,15 @@ class Vente
 			string dosage;
 		Vente(){
 		};
-	void affiche(){
-		cout<<"Bonjour"<<endl;
-	}
+	 
 	Vente(string,int,float,string,int,int,float);
+	
 	void ajouterAuPanier();
-    bool afficherPanier();
+	void reduireLaQuantiteMedicament(string nom,string qte);
+	
+    int afficherPanier();
     string reduireLaQuantite(string,string);
-	 void supprimerDuPanier(string );
+	 int supprimerDuPanier(string );
     
     void setNom(string nom){
     	nomc=nom;
@@ -53,10 +54,13 @@ class Vente
 	void setPrixUnite(float p){
 		prix_unite=p;
 	}
+	int getIdFacture(){
+		return idFacture;
+	}
 
 		
 	
-	//friend void Pharmacien::vendreMedicament(Vente &);
+
 };
 
 #endif

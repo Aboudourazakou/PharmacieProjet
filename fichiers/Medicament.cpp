@@ -25,7 +25,7 @@ istream &operator>>(istream &c,Medicament &m){
 	if(file.bad())cout<<"Erreur d'ouverture fichier"<<endl;
 	else{
 		file<<m.code<<"|"<<m.nomc<<"|"<<m.DCI<<"|"<<m.quantite<<"|"<<m.prix_unite<<"|"<<m.dosage<<"|"<<m.date_exp<<"|"<<m.nbrvente<<endl;
-	    cout<<"Medicament ajoute avec Success"<<endl;
+	    cout<<endl<<endl<<"MEDICAMENT AJOUTE AVEC SUCCES"<<endl;
 	}
 }
 

@@ -34,7 +34,6 @@ void Vente::ajouterAuPanier(){
 	   	 strcpy(N,line.c_str());
 	   	  char *tempon=strtok(N,"|");
 	   	  tempon=strtok(NULL,"|");
-	   	  cout<<tempon;
 	   	  if(!strcmp(tempon,nomc.c_str())){
 	   	  	trouve=true;
 	   	  	 tempon=strtok(NULL,"|");
@@ -90,18 +89,18 @@ void Vente::ajouterAuPanier(){
 	 }
 }
 
-bool Vente::afficherPanier(){
-	bool trouve=false;
+int Vente::afficherPanier(){
+	int trouve=0;
 	ifstream file("panier.txt",ios::in);
 	if(file.bad())cout<<"Erreur d;ouverture"<<endl;
 
 	string line;
 	while(getline(file,line)){
 			 if(line!="\0") trouve=true;
-		 trouve=true;
-	      cout<<line<<endl;
+		 trouve=trouve+1;
+	      cout<<"\t\t"<<line<<endl;
 	}
-	if(trouve==false){
+	if(trouve==0){
 		cout<<"Aucun medicament ajoute au panier"<<endl;
 		return trouve;
 	}
@@ -109,8 +108,9 @@ bool Vente::afficherPanier(){
 	return trouve;
 }
 
-void Vente::supprimerDuPanier(string nom){
-
+int Vente::supprimerDuPanier(string nom){
+  
+    int trouve=0;
 	ifstream file("panier.txt",ios::in);
 	ofstream file2("tempon.txt",ios::app);
 	if(file.bad())cout<<"Erreur d;ouverture"<<endl;
@@ -125,7 +125,7 @@ void Vente::supprimerDuPanier(string nom){
 			char *neutre=strtok(N,"|");
 			neutre=strtok(NULL,"|");
 			if(strcmp(neutre,nom.c_str())){
-		
+		       
 				file2<<line<<endl;
 			}
 			
@@ -138,6 +138,7 @@ void Vente::supprimerDuPanier(string nom){
 	ifstream file3("tempon.txt",ios::in);
 	ofstream file4("panier.txt",ios::app);
     while(getline(file3,line)){
+    	trouve=trouve+1;
     	file4<<line<<endl;
 	}
 	
@@ -146,6 +147,7 @@ void Vente::supprimerDuPanier(string nom){
 	remove("tempon.txt");
 	
 	cout<<"Operation terminee!"<<endl;
+	return trouve;
 	
 	 
 }
@@ -167,7 +169,8 @@ string Vente::reduireLaQuantite(string nom,string qte){
 	  	string line;
 	  	
 	  	while(getline(file,line)){
-	  		 char N[200];
+	  	if(line!="\0"){
+	  		 	 char N[200];
 	  		 strcpy(N,line.c_str());
 	  		 char *neutre=strtok(N,"|");
 	  		 idF=neutre;
@@ -205,6 +208,7 @@ string Vente::reduireLaQuantite(string nom,string qte){
 			   
 			   }
 		  }
+		  }
 		  
 		  file.close();
 		  file2.close();
@@ -227,6 +231,84 @@ string Vente::reduireLaQuantite(string nom,string qte){
 		  file4.close();
 		  remove("tempon.txt");
 		  return response;
+		  
+		  
+		  
+	  }
+	
+}
+
+void Vente::reduireLaQuantiteMedicament(string nom,string qte){
+	  
+	  cout<<endl<<endl<<"Je suis dans REDUCTION"<<endl<<endl;
+	  string  nomc;
+	  int qty;
+	  ifstream file("medicament.txt",ios::in);
+	  ofstream file2("tempon.txt",ios::app);
+	  if(file.bad())cout<<"Erreur d'ouverture"<<endl;
+	  else{
+	  	string line;
+	  	
+	  	while(getline(file,line)){
+	  		 char N[200];
+	  		 strcpy(N,line.c_str());
+	  		 char *neutre=strtok(N,"|");
+	  		 string code=neutre;
+	  		 neutre=strtok(NULL,"|");
+	  		 
+	  		 nomc=neutre;//nomc ici prend le nom commercial du medicament
+	  		 
+	  		 if(line!="\0"){
+	  		 	 if(!strcmp(neutre,nom.c_str())){
+	  		 	
+	  		 	 neutre=strtok(NULL,"|");//Ici nom international
+	  		 	 string dci=neutre;
+	  		 	 neutre=strtok(NULL,"|");//Ici la quantite;
+	  		 	 int qty=atoi(neutre);
+	  		 	 qty=qty-atoi(qte.c_str());//Icii on reduit la quantite,en coonvertissant la chaine quantite recue en int;
+	  		 	  cout<<endl<<endl<<"Je suis dans REDUCTION de"<<atoi(qte.c_str())<<endl<<endl;
+	  		 	 neutre=strtok(NULL,"|");
+	  		 	 string prixUnit=neutre;//Nous declarons des varaibles en string car  les donnees recuees du fichiers sont en string.Et puisque 
+	  		 	 						//nous n'avons aucun besoin de les modifier,on les ramene telles qu'elles etaient par nature
+	  		 	 neutre=strtok(NULL,"|");
+	  		 	 string dosage=neutre;
+	  		 	 neutre=strtok(NULL,"|");
+	  		     string date=neutre;
+	  		 	 neutre=strtok(NULL,"|");
+	  		 	 int nbrevente=atoi(neutre)+atoi(qte.c_str());
+	  		 	 
+	  		 	 	   file2<<code<<"|"<<nomc<<"|"<<dci<<"|"<<qty<<"|"<<prixUnit<<"|"<<dosage<<"|"<<date<<"|"<<nbrevente<<endl;
+					
+				
+			   }
+			else{
+				file2<<line<<endl;
+			}
+			   
+			   }
+		  }
+		  
+		  file.close();
+		  file2.close();
+		  remove("medicament.txt");
+		  ofstream file3("medicament.txt",ios::app);
+		  ifstream file4("tempon.txt",ios::in);
+		  if(file3.bad()||file4.bad())cout<<"Erreur";
+		  else{
+		  	string line;
+		  	while(getline(file4,line)){
+		  		
+		  		if(line!="\0"){
+		  			file3<<line<<endl;
+				  }
+				  
+			  }
+		  }
+		  
+		  file3.close();
+		  file4.close();
+		  remove("tempon.txt");
+	
 		  
 		  
 		  

@@ -1,0 +1,12 @@
+50915|vitamine|3|56|jksdjds|128|168
+51387|Abufene|2|23|jksdjds|128|46
+51942|vitamine|4|56|jksdjds|128|224
+52077|vitamine|3|56|jksdjds|128|168
+52188|Abufene|3|23|jksdjds|128|69
+52318|Abufene|4|23|jksdjds|128|92
+52378|vitamine|3|56|jksdjds|128|168
+52494|Abufene|6|23|jksdjds|128|138
+52509|vitamine|4|56|jksdjds|128|224
+53066|vitamine|1|56|jksdjds|128|56
+53098|Abufene|10|23|jksdjds|128|230
+53098|vitamine|5|56|jksdjds|128|280

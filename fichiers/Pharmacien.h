@@ -33,9 +33,8 @@ class Pharmacien
 		string RechercherMedicament(string query);
 		void vendreMedicament();
 		void voirTotalVentes(string);
-        //void afficherMedicament();
-        //void afficherFacture();
+        void afficherToutesFacture(string role);
 		
 };
-#include"Vente.h"
+
 #endif

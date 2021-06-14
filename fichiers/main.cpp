@@ -11,14 +11,25 @@
 #include"Vente.h"
 #include<conio.h>
 
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 using namespace std;
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+void c(int a)
+{
+    SetConsoleTextAttribute(hConsole, a); /**Cette fonction me permet de choisir des couleurs d affichage**/
+}
+void message(){
+	 c(14);cout<<"Taper une touche  pour continuer  "<<endl;c(15);
+      getch();
+	  system("cls");
+}
+
   welcomeGuide(){
-  	
-   	cout<<endl<<endl<<"\t\t\t BIEVENUE!VEUILLEZ VOUS CONNECTER SVP"<<endl;
-   		
+  	c(2);//Responsable de la couleur verte du texte ci dessous
+   	cout<<endl<<endl<<"\t\t\t BIEVENUE!VEUILLEZ VOUS CONNECTER SVP"<<endl;c(15);//c(15) change la couleur des autres textes en blancs;   		
   }
  string connexion(int id,string password){
  	  string status="error";
@@ -71,7 +82,7 @@ using namespace std;
   }
   
   Pharmacien TrouverPharmacien(int id){
-  	cout<<"Bonjour"<<endl;
+  
   	ifstream file("Pharmaciens.txt");
   	if(file.bad())cout<<"Erreur d'ouverture de fichiers"<<endl;
    else{
@@ -190,14 +201,18 @@ int main(int argc, char** argv) {
     
   
     
-    if(status=="error")cout<<"Erreur d'authentification!"<<endl;
+    if(status=="error")	{
+    	c(4);cout<<"Erreur d'authentification!"<<endl;c(15);
+	}
     
     else{
     	
     	 if(status=="admin"){
     	  int reponse=1;
     	 Medicament M;
+
     	 Vente v;
+
     	 Pharmacien p;
     	 string id;
     	 string nomPharmacien;
@@ -205,9 +220,8 @@ int main(int argc, char** argv) {
     	 string password;
     	 string nomMedicament;
     	 Administrateur admin=TrouverAdmin(identifiant);
-    	 cout<<admin.getNom();
     	 system("cls");//Effacer la console;
-    	  cout<<endl<<"\t\t\t VOUS ETES CONNECTER EN TANT QUE ADMINISTRATEUR";
+    	 c(2); cout<<endl<<"\t\t\t VOUS ETES CONNECTER EN TANT QUE ADMINISTRATEUR";c(15);
     	  cout<<endl<<endl<<"\t\t\tVeuillez choisir ce que vous voulez faire!"<<endl<<endl;
     	  do{
     	  cout<<"1-Creer un pharmacien"<<endl;
@@ -221,9 +235,9 @@ int main(int argc, char** argv) {
     	  cout<<"9-Voir la liste des medicaments"<<endl;
     	  cout<<"10-Voir total des ventes"<<endl;
     	  cout<<"11-Rechercher un medicament par nom commercial ou par identifiant"<<endl;
-    	  cout<<"12-Vendre les medicaments "<<endl<<endl;
-    	  cout<<"13-DECONNEXION"<<endl<<endl;
-    	  
+    	  cout<<"12-Vendre les medicaments "<<endl;
+    	  cout<<"13-Voir liste des factures "<<endl;
+    	  cout<<"14-DECONNEXION"<<endl<<endl;
     	  cout<<"ENTRER L'OPTION DE VOTRE CHOIX'"<<endl;
     	  int option;
     	  cin>>option;
@@ -237,16 +251,32 @@ int main(int argc, char** argv) {
     	  			cout<<"Entrer l'identifiant du pharmacien a supprimer"<<endl;
     	  			cin>>id;
     	  			response=admin.supprimerPharmacien(id);
-    	  			if(response=="user not found")cout<<"Aucun pharmacien ne correspond a cet identifiant "<<endl;
-    	  			else if(response=="success")cout<<"OPERATION EFFECTUEE AVEC SUCCES"<<endl;
+    	  			if(response=="user not found"){
+    	  				c(4);cout<<"Aucun pharmacien ne correspond a cet identifiant "<<endl;
+    	  				message();
+					  }
+    	  			else if(response=="success"){
+    	  				c(2);cout<<"OPERATION EFFECTUEE AVEC SUCCES"<<endl;
+    	  				message();
+					  }
     	  			break;
     	  	case 3:cout<<endl<<"\t\t\tCREATION COMPTE"<<endl<<endl;
     	  	        cout<<"Entrer l'id du pharmacien"<<endl;
     	  	        cin>>id;
     	  	         response=admin.creerCompte(id);
-    	  			if(response=="success") cout<<"\t\t\t OPERATION EFFECTUE AVEC SUCCES"<<endl;
-    	  			else if(response=="existe deja")cout<<"\t\t\t UN COMPTE AU MEME IDENTIFIANT EXISTE DEJA"<<endl;
-    	  			else if(response=="id non correspondant")cout<<"\t\t\t CET UTILISATEUR N''EXISTE PAS"<<endl;
+    	  			if(response=="success"){ 
+					  
+					   c(2); cout<<"\t\t\t OPERATION EFFECTUE AVEC SUCCES"<<endl;
+					   message();
+				}
+    	  			else if(response=="existe deja"){
+    	  				  c(4); cout<<"\t\t\t UN COMPTE AU MEME IDENTIFIANT EXISTE DEJA"<<endl;
+					       message();
+					  }
+    	  			else if(response=="id non correspondant"){
+    	  				  c(4); cout<<"\t\t\t CET IDENTIFIANT NE CORRESPOND A AUCUN PHARMACIEN"<<endl;
+					     message();
+					  }
     	  			break;
     	  	case 4:cout<<"Entrer l'identifiant"<<endl;
     	  	
@@ -255,34 +285,44 @@ int main(int argc, char** argv) {
     	  	        cin>>password;
     	  	        response=admin.supprimerCompte(id,password);
     	  	        if(response=="success"){
-    	  	        	 cout<<"\t\t\t OPERATION EFFECTUE AVEC SUCCES"<<endl;
+    	  	        	c(2); cout<<"\t\t\t OPERATION EFFECTUE AVEC SUCCES"<<endl;
+    	  	        	message();
 					  }
-					else if(response=="user not found") cout<<"\t\t\t OPERATION N'A PAS ABOUTI.ENTREZ LES BONNES VALEURS"<<endl;
+					else if(response=="user not found"){
+						c(4);cout<<"\t\t\t OPERATION N'A PAS ABOUTI.ENTREZ LES BONNES VALEURS"<<endl;
+						message();
+					}
     	  	        
     	  			break;
     	  	case 5:cout<<endl<<"\t\t\t CREATION MEDICAMENT"<<endl<<endl;
     	  			admin.ajouterMedicament(M);
+    	  			message();
     	  			break;
     	  	case 6:cout<<endl<<"\t\t\t MODIFICATION MEDICAMENT"<<endl<<endl;
     	  			cout<<"Entrer l'identifiant du medicament a modifier"<<endl;
     	  			cin>>id;
     	  		   admin.modifierMedicament(id,M);
+    	  		   message();
     	  			break;
     	  	case 7:cout<<endl<<"\t\t\t SUPPRESSION D'UN MEDICAMENT'"<<endl<<endl;
     	  	       cout<<"Entrer le nom du medicament a supprimer"<<endl;
 					cin>>nomMedicament;
     	  	        if(admin.supprimerMedicament(nomMedicament)){
-    	  	        	cout<<"Supprime avec succes"<<endl;
+    	  	        	c(2);cout<<endl<<"Supprime avec succes"<<endl;
+    	  	        	message();
 					  }
 					  else{
-					  	 cout<<"Aucune suppression n'a eu lieu.Entrer les infos corrects"<<endl;
+					  	 c(4);cout<<endl<<"Aucune suppression n'a eu lieu.Entrer les infos corrects"<<endl;
+					  	 message();
 					  }
     	  			break;
     	  	case 8:cout<<endl<<"\t\t\t LISTE DES PHARMACIENS"<<endl<<endl;
     	  	        admin.afficherPharmaciens();
+    	  	        message();
     	  			break;
     	  	case 9:cout<<endl<<"\t\t\t LISTE DES MEDICAMENTS"<<endl<<endl;
     	            admin.afficherListeMedicament();
+    	            message();
     	    		break;
     	  	
     	 
@@ -290,6 +330,7 @@ int main(int argc, char** argv) {
     	  
     	    case 10: cout<<endl<<"\t\t\t TOTAL DES VENTES"<<endl<<endl;
     	    	    admin.voirTotalVentes("admin");
+    	    	    message();
     	           break;
     	    case 11:cout<<endl<<"\t\t\t RECHERCHE DES MEDICAMENTS"<<endl<<endl;
     	  	        cout<<"Entrer l'identifiant ou le nom commercial du medicament a rechercher"<<endl;
@@ -299,13 +340,21 @@ int main(int argc, char** argv) {
     	  	        else {
     	  	        	  cout<<"Ce medicmanent existe et voici ces informations"<<endl;
     	  	        	  M=convertStringToMedicamentObject(response);
+    	  	        	   message();
     	  	        	  M.afficher();
+    	  	        	  message();
+    	  	        	 
 					  }
     	  			break;
     	    case 12:cout<<endl<<"\t\t\t VENTE  DES MEDICAMENTS"<<endl<<endl;
     	            admin.vendreMedicament();
+    	            message();
     	    		break;
-    	 	case 13:cout<<endl<<endl<<"\t\tDECONNECTE AVEC SUCCES"<<endl;
+    	    case 13:cout<<endl<<"\t\t\t LISTE DES FACTURES"<<endl<<endl;
+    	            admin.afficherToutesFacture("admin");
+    	            message();
+    	    		break;
+    	 	case 14:cout<<endl<<endl<<"\t\tDECONNECTE AVEC SUCCES"<<endl;
     	  			reponse=2;//Deconnecte;
     	  			break;
     	  	default:cout<<endl<<endl<<"\t\tDECONNECTE AVEC SUCCES"<<endl;
@@ -324,7 +373,7 @@ int main(int argc, char** argv) {
 		 
 		 	 int reponse=1;
 		 	 system("cls");//Effacer la console;
-    	     cout<<endl<<"\t\t\t VOUS ETES CONNECTER EN TANT QUE PHARMACIEN";
+    	    	 c(2); cout<<endl<<"\t\t\t VOUS ETES CONNECTER EN TANT QUE PHARMACIEN";c(15);
     	     cout<<endl<<endl<<"\t\t\tVeuillez choisir ce que vous voulez faire!"<<endl<<endl;
     	       do{
 		  
@@ -341,15 +390,19 @@ int main(int argc, char** argv) {
     	  	
     	  	case 1:cout<<endl<<"\t\t\t LISTE DES VENTES"<<endl<<endl;
     	  	        pharmacien.voirTotalVentes("user");
+    	  	           message();
     	  	       break;
     	  	case 2:cout<<endl<<"\t\t\t LISTE DES MEDICAMENTS"<<endl<<endl;
     	  	        pharmacien.afficherListeMedicament();
+    	  	           message();
     	  			break;
     	  	case 3:cout<<endl<<"\t\t\t VENTE DES MEDICAMENTS"<<endl<<endl;
     	  	        pharmacien.vendreMedicament();
+    	  	           message();
     	  			break;
     	  	case 4:cout<<endl<<"\t\t\t FACTURES"<<endl<<endl;
-    	  	        pharmacien.vendreMedicament();
+    	  	        pharmacien.afficherToutesFacture("user");
+    	  	        message();
     	  			break;
     	  	case 5:cout<<endl<<endl<<"\t\tDECONNECTE AVEC SUCCES"<<endl;
     	  			reponse=2;//Deconnecte;
